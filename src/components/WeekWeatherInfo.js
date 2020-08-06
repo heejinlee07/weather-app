@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+import { dayNames } from "../constants/DateTime";
+
+import { IconImg } from "../styles/CommonStyle";
+
 const Wrapper = styled.div`
   padding-top: 10px;
 `;
@@ -21,24 +25,23 @@ const DailyTemp = styled.div`
 `;
 
 export default function WeekWeatherInfo({ week }) {
-  const dayNames = [
-    "일요일",
-    "월요일",
-    "화요일",
-    "수요일",
-    "목요일",
-    "금요일",
-    "토요일",
-  ];
-
   const time = new Date(week.dt * 1000);
+  console.log("week", week);
   const name = dayNames[time.getDay()];
+
+  const DailyIconId = week?.weather.map((icon) => icon.icon);
 
   return (
     <Wrapper>
       <DailyList>
         <div>{name}</div>
-        <div>아이콘</div>
+        <div>
+          <IconImg
+            src={`http://openweathermap.org/img/wn/${DailyIconId}@2x.png`}
+            height={30}
+            width={30}
+          />
+        </div>
         <DailyTemp>
           <div>{week.temp.max.toFixed()}</div>
           <div>{week.temp.min.toFixed()}</div>
