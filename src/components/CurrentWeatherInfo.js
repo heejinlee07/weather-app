@@ -4,6 +4,17 @@ import { API_KEY } from "../utils/key";
 
 import styled from "styled-components";
 
+import HourlyWeatherInfo from "./HourlyWeatherInfo";
+import WeekWeatherInfo from "./WeekWeatherInfo";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+`;
+
 const CurrentAreaInfo = styled.div`
   background: pink;
   display: flex;
@@ -31,54 +42,6 @@ const CurrentDayTemp = styled.div`
   justify-content: space-between;
 `;
 
-const CurrentHourlyInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: beige;
-  width: 500px;
-  height: 80px;
-  overflow-x: scroll;
-`;
-
-const CurrentHourlyTime = styled.div`
-  display: flex;
-`;
-
-const CurrentHourlyHumidity = styled.div`
-  display: flex;
-
-  & > div {
-    margin-right: 10px;
-  }
-`;
-
-const CurrentHourlyIcon = styled.div`
-  display: flex;
-`;
-
-const CurrentHourlyTemp = styled.div`
-  display: flex;
-
-  & > div {
-    margin-right: 10px;
-  }
-`;
-
-const DailyList = styled.div`
-  display: flex;
-  width: 500px;
-  justify-content: space-between;
-`;
-
-const DailyTemp = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  & > div {
-    margin-right: 10px;
-  }
-`;
-
 const CurrentTotalInfo = styled.div`
   display: flex;
   flex-direction: row;
@@ -104,7 +67,7 @@ const CurrentTotalText = styled.div`
   margin-top: 10px;
 `;
 
-const dayNames = [
+export const dayNames = [
   "일요일",
   "월요일",
   "화요일",
@@ -117,7 +80,7 @@ const dayNames = [
 const CurrentWeatherInfo = () => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState([]);
   const [lat, setLat] = useState(37.5326);
   const [lon, setLon] = useState(127.024612);
 
@@ -164,7 +127,7 @@ const CurrentWeatherInfo = () => {
   const sunsetMinutes = sunsetTime.getMinutes();
 
   return (
-    <div>
+    <Wrapper>
       {isLoading && <h1>Now Loading...</h1>}
       {hasError && <h1>Error Occured...</h1>}
       <CurrentAreaInfo>
@@ -186,42 +149,11 @@ const CurrentWeatherInfo = () => {
           <div>{weather.daily?.[0].temp.min.toFixed()}</div>
         </CurrentDayTemp>
       </CurrentDayInfo>
-      <CurrentHourlyInfo>
-        <CurrentHourlyTime>시간표시</CurrentHourlyTime>
-        <CurrentHourlyHumidity>
-          {weather.hourly?.map((humid) => (
-            <div>{humid.humidity}%</div>
-          ))}
-        </CurrentHourlyHumidity>
-        <CurrentHourlyIcon>
-          {weather.hourly?.map((_hourly) =>
-            _hourly.weather.map((icon) => <div>{icon.icon}</div>)
-          )}
-        </CurrentHourlyIcon>
-        <CurrentHourlyTemp>
-          {weather.hourly?.map((hr) => (
-            <div>{hr.temp.toFixed()}°</div>
-          ))}
-        </CurrentHourlyTemp>
-      </CurrentHourlyInfo>
-      <hr />
-      <div>
-        <b>daily temp</b>
-        {weather.daily?.map((day) => {
-          const time = new Date(day.dt * 1000);
-          const name = dayNames[time.getDay()];
-          return (
-            <DailyList>
-              <div>{name}</div>
-              <div>아이콘</div>
-              <DailyTemp>
-                <div>{day.temp.max.toFixed()}</div>
-                <div>{day.temp.min.toFixed()}</div>
-              </DailyTemp>
-            </DailyList>
-          );
-        })}
-      </div>
+      {weather.hourly?.map((_hourly) => (
+        <HourlyWeatherInfo hourly={_hourly} />
+      ))}
+      {!isLoading &&
+        weather.daily?.map((week) => <WeekWeatherInfo week={week} />)}
       <hr />
       {todayKeyword}: 현재 날씨{" "}
       {weather.current?.weather.map((main) => (
@@ -262,7 +194,7 @@ const CurrentWeatherInfo = () => {
           <div>{weather.current?.uvi}</div>
         </CurrentTotalSunset>
       </CurrentTotalInfo>
-    </div>
+    </Wrapper>
   );
 };
 
