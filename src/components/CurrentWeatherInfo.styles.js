@@ -4,20 +4,23 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  padding: 100px;
+  align-items: flex-start;
+  padding: 70px 210px;
+  margin: 0;
 `;
 
 export const WeatherWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-  padding: 100px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
 `;
 
 export const CurrentAreaInfo = styled.div`
-  background: pink;
+  /* background: pink; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +28,7 @@ export const CurrentAreaInfo = styled.div`
 `;
 
 export const CurrentDayInfo = styled.div`
-  background: skyblue;
+  /* background: skyblue; */
   display: flex;
   justify-content: space-between;
   width: 500px;
@@ -34,7 +37,7 @@ export const CurrentDayInfo = styled.div`
 export const CurrentHourlyInfo = styled.div`
   display: flex;
   flex-direction: row;
-  background: beige;
+  /* background: beige; */
   width: 500px;
   height: 100px;
   overflow-x: scroll;

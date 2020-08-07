@@ -32,12 +32,12 @@ const AirTotalText = styled.div`
 `;
 
 export default function AirPollutionList({ air }) {
-  const { MSRDT, IDEX_NM, MSRSTE_NM, PM10, PM25 } = air;
+  const { IDEX_NM, MSRSTE_NM, PM10, PM25 } = air;
 
   return (
     <Wrapper>
       <AirTotalInfo>
-        {IDEX_NM !== "점검중" ? IDEX_NM : ""}
+        {IDEX_NM !== "점검중" ? IDEX_NM : "-"}
         <AirAreaText>{MSRSTE_NM}</AirAreaText>
         <AirPollutionWrapper>
           <AirPollution>

@@ -38,7 +38,7 @@ const CurrentHourlyTemp = styled.div`
 
 function HourlyWeatherInfo({ hourly }) {
   const hourlyTime = new Date(hourly.dt * 1000);
-  const name = dayNames[hourlyTime.getDay()];
+
   let hour = hourlyTime.getHours();
   const ampm = hour >= 12 ? "오후 " : "오전 ";
 

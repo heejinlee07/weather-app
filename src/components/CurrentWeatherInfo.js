@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { api } from "../utils/weatherApi";
 import { API_KEY } from "../utils/weatherKey";
 
+import TodayDate from "./TodayDate";
 import HourlyWeatherInfo from "./HourlyWeatherInfo";
 import WeekWeatherInfo from "./WeekWeatherInfo";
-import AirPollutionSet from "./AirPollutionSet";
 import { dayNames } from "../constants/DateTime";
 import { getFixedNumberWithDefaultWithoutOrder } from "../utils/calculate";
 
@@ -54,9 +54,14 @@ const CurrentWeatherInfo = () => {
   // 오늘 시간 계산
   const today = new Date(weather.current?.dt * 1000);
   const todayName = dayNames[today.getDay()];
-  const hour = today.getHours();
 
-  const todayKeyword = hour <= 24 ? "오늘" : "야간";
+  let hour = today.getHours();
+  hour %= 12;
+  hour = hour || 12;
+
+  const todayKeyword = hour <= 12 ? "오늘" : "야간";
+  console.log(todayKeyword);
+  console.log(hour);
 
   // 일출,일몰 시간 계산
   const sunriseTime = new Date(weather.current?.sunrise * 1000);
@@ -76,7 +81,7 @@ const CurrentWeatherInfo = () => {
 
   return (
     <Wrapper>
-      <AirPollutionSet />
+      <TodayDate />
       <WeatherWrapper>
         {isLoading && <h1>Now Loading...</h1>}
         {hasError && <h1>Error Occured...</h1>}

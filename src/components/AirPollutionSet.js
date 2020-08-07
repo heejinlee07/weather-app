@@ -4,7 +4,17 @@ import AirPollutionList from "./AirPollutionList";
 
 import styled from "styled-components";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AirTimeInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function AirPollutionSet() {
   const [airs, setAirs] = useState();
@@ -28,7 +38,7 @@ export default function AirPollutionSet() {
     getAirList();
   }, []);
 
-  if (isLoading && !airs) return <div>로딩중</div>;
+  if (isLoading && !airs) return <div>Now Loading...</div>;
 
   const time = airs[0]?.MSRDT;
 
@@ -38,15 +48,19 @@ export default function AirPollutionSet() {
   const minutes = time.slice(8, 10) + "시 " + time.slice(10, 12) + "분";
 
   return (
-    <Wrapper>
-      <h2>측정시간</h2>
-      <div>{`${year}년 ${month}월 ${day}일 ${minutes}`}</div>
-      {hasError && <h1>Error Occured...</h1>}
-      <div>
-        {airs.map((air) => (
-          <AirPollutionList key={air.MSRSTE_NM} air={air} />
-        ))}
-      </div>
-    </Wrapper>
+    <>
+      <AirTimeInfo>
+        <h2>측정시간</h2>
+        <div>{`${year}년 ${month}월 ${day}일 ${minutes}`}</div>
+      </AirTimeInfo>
+      <Wrapper>
+        {hasError && <h1>Error Occured...</h1>}
+        <div>
+          {airs.map((air) => (
+            <AirPollutionList key={air.MSRSTE_NM} air={air} />
+          ))}
+        </div>
+      </Wrapper>
+    </>
   );
 }
