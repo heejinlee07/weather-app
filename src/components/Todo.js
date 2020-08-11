@@ -1,5 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import AirPollutionItem from "./AirPollutionItem";
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,13 +13,20 @@ const Wrapper = styled.div`
   border-radius: 10px;
   padding: 10px;
 `;
-export default function Todo() {
+export default function SelectedAirItem() {
+  const selectedAir = useSelector(({ airs }) => airs.selectedAir);
+  const history = useHistory();
+
   return (
     <Wrapper>
-      <h2>오늘의 할 일</h2>
-      <div>밥먹기</div>
-      <div>집에가기</div>
-      <div>잠자기</div>
+      {selectedAir ? (
+        <AirPollutionItem
+          air={selectedAir}
+          onClickHandler={() => history.push("/air")}
+        />
+      ) : (
+        <div>선택된 데이터가 없습니다.</div>
+      )}
     </Wrapper>
   );
 }

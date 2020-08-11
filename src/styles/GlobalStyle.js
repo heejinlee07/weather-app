@@ -6,14 +6,17 @@ ${reset}
   *{
     box-sizing: border-box;
   }
+  
   body{
     padding: 10px;
     margin: 10px;
   }
+  
   img, a img {
     outline: none;
     border: none;
   }
+  
   a {
         text-decoration: none;
     }

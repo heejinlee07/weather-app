@@ -1,57 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { api } from "../services/airPollutionApi";
+import AirPollutionItem from "./AirPollutionItem";
+
+import {
+  AIR_SET_LOADING,
+  AIR_SET_DATA,
+  AIR_HAS_ERROR,
+} from "../modules/AirReducer";
+import { useSelector, useDispatch } from "react-redux";
+
 import styled from "styled-components";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`;
 
-const AirTotalInfo = styled.div`
+const AirTimeInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  border: 1px solid green;
+  justify-content: center;
+  align-items: center;
 `;
 
-const AirAreaText = styled.div`
-  display: flex;
-  flex-direction: row;
+const AirTitle = styled.div`
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 20px;
+
+  & > div {
+    font-size: 15px;
+    margin-top: 20px;
+  }
 `;
 
-const AirPollutionWrapper = styled.div`
-  display: flex;
-`;
+export default function AirPollutionList() {
+  const airs = useSelector(({ airs }) => airs.airs);
+  const status = useSelector(({ airs }) => airs.status);
 
-const AirPollution = styled.div`
-  margin-right: 15px;
-`;
+  const dispatch = useDispatch();
 
-const AirPollutionDust = styled.div``;
+  useEffect(() => {
+    const getAirList = async () => {
+      dispatch({ type: AIR_SET_LOADING });
+      try {
+        const { data } = await api.get("/");
+        // setAirs(data.RealtimeCityAir.row);
+        dispatch({ type: AIR_SET_DATA, payload: data.RealtimeCityAir.row });
+        console.log("data", data);
+        console.log("[data array RealtimeCityAir]", data.RealtimeCityAir);
+        console.log("[data array row]", data.RealtimeCityAir.row);
+      } catch (e) {
+        dispatch({ type: AIR_HAS_ERROR });
+      }
+    };
+    getAirList();
+  }, [dispatch]);
 
-const AirTotalText = styled.div`
-  font-size: 14px;
-  color: gray;
-  margin-top: 10px;
-`;
+  if (status === "idle" || (status === "loading" && airs.length === 0))
+    return <div>Now Loading...</div>;
 
-export default function AirPollutionList({ air }) {
-  const { IDEX_NM, MSRSTE_NM, PM10, PM25 } = air;
+  const time = airs[0]?.MSRDT;
+  const year = time.slice(0, 4);
+  const month = time.slice(4, 6);
+  const day = time.slice(6, 8);
+  const minutes = time.slice(8, 10) + "시 " + time.slice(10, 12) + "분";
 
   return (
-    <Wrapper>
-      <AirTotalInfo>
-        {IDEX_NM !== "점검중" ? IDEX_NM : "-"}
-        <AirAreaText>{MSRSTE_NM}</AirAreaText>
-        <AirPollutionWrapper>
-          <AirPollution>
-            <AirTotalText>미세먼지(㎍/㎥)</AirTotalText>
-            <div>{PM10}</div>
-            <AirTotalText>미세먼지(㎍/㎥)</AirTotalText>
-            <div>{PM10}</div>
-          </AirPollution>
-          <AirPollutionDust>
-            <AirTotalText>초미세먼지농도(㎍/㎥)</AirTotalText>
-            <div>{PM25}</div>
-          </AirPollutionDust>
-        </AirPollutionWrapper>
-      </AirTotalInfo>
-    </Wrapper>
+    <>
+      <AirTimeInfo>
+        <AirTitle>
+          서울시 대기환경 현황
+          <div>측정시간: {`${year}년 ${month}월 ${day}일 ${minutes}`}</div>
+        </AirTitle>
+      </AirTimeInfo>
+      <Wrapper>
+        {status === "error" && <h1>Error Occured...</h1>}
+        {airs.map((air) => (
+          <AirPollutionItem key={air.MSRSTE_NM} air={air} />
+        ))}
+      </Wrapper>
+    </>
   );
 }

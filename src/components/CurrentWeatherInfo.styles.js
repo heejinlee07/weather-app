@@ -41,6 +41,7 @@ export const CurrentHourlyInfo = styled.div`
   width: 500px;
   height: 100px;
   overflow-x: scroll;
+  padding: 20px 0;
 `;
 
 export const CurrentDayName = styled.div`

@@ -64,24 +64,28 @@ second = second < 10 ? "0" + second : second;
 console.log(today);
 
 export default function TodayDate() {
-  const [value, setValue] = useState("");
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [value, setValue] = useState(localStorage.getItem("username"));
+  const [isLoggedIn, setLoggedIn] = useState(
+    !!localStorage.getItem("username")
+  );
 
   const saveUser = (value) => {
     localStorage.setItem("username", value);
   };
 
-  const onCreate = (e) => {
+  const onCreate = () => {
+    if (!value) return;
     saveUser(value);
     setLoggedIn(true);
     setValue("");
+    // e.preventDefault();
   };
 
   console.log(value);
 
   const onChange = (e) => {
     setValue(e.target.value);
-    if (e.target.value === "") return;
+    // if (e.target.value === "") return;
   };
 
   console.log(value);
