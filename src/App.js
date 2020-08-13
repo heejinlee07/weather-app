@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-import CurrentWeatherInfo from "./components/CurrentWeatherInfo";
-import AirPollutionList from "./components/AirPollutionList";
+import TotalInfo from "./components/weatherInfos/TotalInfo";
+import AirPollutionList from "./components/airPollutions/AirPollutionList";
 
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Button from "./components/common/button";
 import bgImage from "./assets/main.jpg";
+
+const ToggleButton = styled.div``;
 
 const Main = styled.div`
   /* background-image: url(${bgImage}); */
@@ -37,21 +39,26 @@ function App() {
         <>
           <ButtonArea>
             <Link to="/">
-              <Button btnHeight={30} btnWidth={50}>
+              <Button btnHeight={30} btnWidth={100}>
                 오늘의 날씨
               </Button>
             </Link>
             <Link to="air">
-              <Button btnHeight={30} btnWidth={50}>
+              <Button btnHeight={30} btnWidth={150}>
                 서울시 미세먼지 정보
               </Button>
             </Link>
+            <ToggleButton>
+              <Button btnHeight={30} btnWidth={100}>
+                toggle
+              </Button>
+            </ToggleButton>
           </ButtonArea>
           <GlobalStyle />
           <Title>오늘의 날씨</Title>
         </>
         <Switch>
-          <Route exact path="/" component={CurrentWeatherInfo} />
+          <Route exact path="/" component={TotalInfo} />
           <Route path="/air" component={AirPollutionList} />
         </Switch>
       </BrowserRouter>

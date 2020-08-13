@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { api } from "../services/weatherApi";
-import { API_KEY } from "../services/weatherKey";
+import { api } from "../../services/weatherApi";
+import { API_KEY } from "../../services/weatherKey";
 
 import {
   WEATHER_SET_LOADING,
   WEATHER_SET_DATA,
   WEATHER_HAS_ERROR,
-} from "../modules/WeatherReducer";
+} from "../../modules/WeatherReducer";
 import { useSelector, useDispatch } from "react-redux";
 
-import TodayDate from "./TodayDate";
 import HourlyWeatherInfo from "./HourlyWeatherInfo";
-import WeekWeatherInfo from "./WeekWeatherInfo";
-import { dayNames } from "../constants/DateTime";
-import { getFixedNumberWithDefaultWithoutOrder } from "../utils/calculate";
-
+import { dayNames } from "../../constants/DateTime";
+import { getFixedNumberWithDefaultWithoutOrder } from "../../utils/calculate";
 import {
-  Wrapper,
   WeatherWrapper,
   CurrentAreaInfo,
   CurrentDayInfo,
@@ -28,13 +24,14 @@ import {
   CurrentTotalSunrise,
   CurrentTotalSunset,
   CurrentTotalText,
+  Timezone,
 } from "./CurrentWeatherInfo.styles";
 
-import { IconImg } from "../styles/CommonStyle";
+import { IconImg } from "../../styles/CommonStyle";
 
 const CurrentWeatherInfo = () => {
-  const [lat, setLat] = useState(37.5326);
-  const [lon, setLon] = useState(127.024612);
+  // TODO: useState의 초기값이 어떤 역할을 하는지
+  const selectedLocation = useSelector(({ geos }) => geos.selectedLocation);
 
   // const status = useSelector((state) => state.weathers.status);
   const status = useSelector(({ weathers }) => weathers.status);
@@ -49,7 +46,7 @@ const CurrentWeatherInfo = () => {
 
       try {
         const { data } = await api.get(
-          `/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&lang=kr&exclude=minutely&appid=${API_KEY}`
+          `/data/2.5/onecall?lat=${selectedLocation.lat}&lon=${selectedLocation.lon}&units=metric&lang=kr&exclude=minutely&appid=${API_KEY}`
         );
         console.log("data", data);
         dispatch({ type: WEATHER_SET_DATA, payload: data });
@@ -58,7 +55,8 @@ const CurrentWeatherInfo = () => {
       }
     }
     getWeatherList();
-  }, [lat, lon, dispatch]);
+    // TODO: React dependency array
+  }, [dispatch, selectedLocation]);
 
   // 오늘 시간 계산
   const today = new Date(weathers.current?.dt * 1000);
@@ -89,13 +87,12 @@ const CurrentWeatherInfo = () => {
   const CurrentIconId = weathers.current?.weather.map((icon) => icon.icon);
 
   return (
-    <Wrapper>
-      <TodayDate />
+    <>
       <WeatherWrapper>
         {status === "loading" && <h1>Now Loading...</h1>}
         {status === "error" && <h1>Error Occured...</h1>}
         <CurrentAreaInfo>
-          <div>{weathers.timezone}</div>
+          <Timezone>{weathers.timezone}</Timezone>
           <div>
             {weathers.current?.weather.map((main) => (
               <div>{main.description}</div>
@@ -104,8 +101,8 @@ const CurrentWeatherInfo = () => {
           <div>{weathers.current?.temp.toFixed()} ℃</div>
           <IconImg
             src={`http://openweathermap.org/img/wn/${CurrentIconId}@2x.png`}
-            height={70}
-            width={80}
+            height={150}
+            width={100}
           />
         </CurrentAreaInfo>
         <CurrentDayInfo>
@@ -123,10 +120,6 @@ const CurrentWeatherInfo = () => {
             <HourlyWeatherInfo hourly={_hourly} />
           ))}
         </CurrentHourlyInfo>
-        {!status &&
-          weathers.daily
-            ?.slice(1)
-            .map((week) => <WeekWeatherInfo week={week} />)}
         <CurrentDescription>
           {todayKeyword}: 현재 날씨{" "}
           {weathers.current?.weather.map((main) => (
@@ -172,7 +165,7 @@ const CurrentWeatherInfo = () => {
           </CurrentTotalSunset>
         </CurrentTotalInfo>
       </WeatherWrapper>
-    </Wrapper>
+    </>
   );
 };
 

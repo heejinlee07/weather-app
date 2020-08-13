@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "./common/button";
-import { dayNames } from "../constants/DateTime";
-import Todo from "./Todo";
+import Button from "../common/button";
+import { dayNames } from "../../constants/DateTime";
+import SelectedWeatherItem from "../airPollutions/SelectedAirItem";
 
-const WrapperBlock = styled.div``;
+const WrapperBlock = styled.div`
+  margin-right: 100px;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,7 +139,7 @@ export default function TodayDate() {
           </Greeting>
         </TimeBlock>
       </Wrapper>
-      <Todo />
+      <SelectedWeatherItem />
     </WrapperBlock>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { getFixedNumberWithDefaultWithoutOrder } from "../utils/calculate";
-import { dayNames } from "../constants/DateTime";
-import { IconImg } from "../styles/CommonStyle";
+import { getFixedNumberWithDefaultWithoutOrder } from "../../utils/calculate";
+import { dayNames } from "../../constants/DateTime";
+import { IconImg } from "../../styles/CommonStyle";
 
 const Wrapper = styled.div``;
 
@@ -11,29 +11,33 @@ const CurrentHourlyTime = styled.div`
   display: flex;
   flex-direction: row;
   width: 70px;
+  margin: 5px 0;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CurrentHourlyHumidity = styled.div`
   display: flex;
   flex-direction: row;
-
-  & > div {
-    margin-right: 10px;
-  }
+  margin: 5px 0;
+  font-size: 13px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CurrentHourlyIcon = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CurrentHourlyTemp = styled.div`
   display: flex;
   flex-direction: row;
-
-  & > div {
-    margin-right: 10px;
-  }
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
 `;
 
 function HourlyWeatherInfo({ hourly }) {
@@ -68,8 +72,8 @@ function HourlyWeatherInfo({ hourly }) {
       <CurrentHourlyIcon>
         <IconImg
           src={`http://openweathermap.org/img/wn/${HourlyIconId}@2x.png`}
-          height={30}
-          width={30}
+          height={50}
+          width={60}
         />
       </CurrentHourlyIcon>
       <CurrentHourlyTemp>

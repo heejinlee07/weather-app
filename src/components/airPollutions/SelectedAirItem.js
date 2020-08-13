@@ -7,7 +7,7 @@ import AirPollutionItem from "./AirPollutionItem";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 200px;
+  height: 450px;
   margin-top: 80px;
   border: 1px solid gray;
   border-radius: 10px;
@@ -16,9 +16,11 @@ const Wrapper = styled.div`
 export default function SelectedAirItem() {
   const selectedAir = useSelector(({ airs }) => airs.selectedAir);
   const history = useHistory();
+  console.log("history", history);
 
   return (
     <Wrapper>
+      서울시 미세먼지 정보
       {selectedAir ? (
         <AirPollutionItem
           air={selectedAir}
