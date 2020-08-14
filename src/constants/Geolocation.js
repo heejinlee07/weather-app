@@ -13,7 +13,7 @@ export const locations = [
   },
   {
     id: 3,
-    name: "Sanfransisco",
+    name: "LosAngeles",
     lat: 37.77493,
     lon: -122.419415,
   },

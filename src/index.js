@@ -4,7 +4,6 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./modules";
-import { composeWithDevTools } from "redux-devtools-extension";
 import logger from "redux-logger";
 
 const store = createStore(rootReducer, applyMiddleware(logger));

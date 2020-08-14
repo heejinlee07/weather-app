@@ -5,9 +5,8 @@ export const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  max-width: 990px;
-  /* padding: 70px; */
-  padding: 70px 21px;
+  max-width: 1100px;
+  padding: 70px 0;
   margin: 0 auto;
 `;
 
@@ -19,7 +18,7 @@ export const WeatherWrapper = styled.div`
   border: 1px solid gray;
   padding: 10px;
   border-radius: 10px;
-  height: 672px;
+  height: 680px;
 `;
 
 export const CurrentAreaInfo = styled.div`
@@ -28,7 +27,7 @@ export const CurrentAreaInfo = styled.div`
   align-items: center;
   width: 500px;
   height: 200px;
-  padding: 30px;
+  padding: 15px;
 
   & > div {
     margin-top: 7px;
@@ -47,7 +46,7 @@ export const CurrentHourlyInfo = styled.div`
   display: flex;
   flex-direction: row;
   width: 500px;
-  height: 130px;
+  height: 200px;
   overflow-x: scroll;
   overflow-y: hidden;
   padding: 10px;

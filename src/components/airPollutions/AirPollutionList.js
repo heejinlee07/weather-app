@@ -21,7 +21,7 @@ const AirPollutionListBlock = styled.div`
 const ButtonArea = styled.div`
   position: absolute;
   top: 20px;
-  right: 0px;
+  right: 81px;
   width: 70px;
 `;
 

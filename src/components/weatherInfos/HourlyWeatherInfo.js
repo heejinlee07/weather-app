@@ -41,6 +41,7 @@ const CurrentHourlyTemp = styled.div`
 `;
 
 function HourlyWeatherInfo({ hourly }) {
+  console.log("hourly", hourly);
   const hourlyTime = new Date(hourly.dt * 1000);
 
   let hour = hourlyTime.getHours();

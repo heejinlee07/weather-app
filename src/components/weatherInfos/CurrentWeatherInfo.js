@@ -8,7 +8,7 @@ import {
   WEATHER_HAS_ERROR,
 } from "../../modules/WeatherReducer";
 import { useSelector, useDispatch } from "react-redux";
-
+import WeekWeatherInfo from "./WeekWeatherInfo";
 import HourlyWeatherInfo from "./HourlyWeatherInfo";
 import { dayNames } from "../../constants/DateTime";
 import { getFixedNumberWithDefaultWithoutOrder } from "../../utils/calculate";
@@ -120,6 +120,9 @@ const CurrentWeatherInfo = () => {
             <HourlyWeatherInfo hourly={_hourly} />
           ))}
         </CurrentHourlyInfo>
+        {weathers.daily?.slice(1).map((week) => (
+          <WeekWeatherInfo week={week} />
+        ))}
         <CurrentDescription>
           {todayKeyword}: 현재 날씨{" "}
           {weathers.current?.weather.map((main) => (

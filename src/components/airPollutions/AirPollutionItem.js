@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import clearSky from "../../assets/clearSky.jpg";
 import sunnySky from "../../assets/sunnySky.jpg";
-import main from "../../assets/main.jpg";
+import main2 from "../../assets/main2.jpg";
 
 const Wrapper = styled.div``;
 
@@ -14,7 +14,7 @@ const AirTotalInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 350px;
+  height: 220px;
   margin: 20px;
   padding: 10px;
   border: 1px solid gray;
@@ -36,7 +36,7 @@ const AirAreaBlock = styled.div`
   z-index: 1;
   padding: 40px;
   width: 380px;
-  height: 330px;
+  height: 200px;
   border-radius: 10px;
   background-image: url(${(props) => props.url});
   background-size: cover;
@@ -54,19 +54,35 @@ const AirAreaText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 const AirPollutionWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 380px;
-  height: 330px;
+  height: 220px;
+`;
+
+const AirDetail = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
 `;
 
 const AirPollution = styled.div`
   margin-right: 15px;
+  height: 200px;
+
+  & > * {
+    font-size: 20px;
+  }
 `;
 
-const AirPollutionDust = styled.div``;
+const AirPollutionDust = styled.div`
+  font-size: 20px;
+`;
 
 const AirTotalText = styled.div`
   font-size: 14px;
@@ -81,7 +97,7 @@ function getWeatherImage(type) {
     case "보통":
       return clearSky;
     default:
-      return main;
+      return main2;
   }
 }
 
@@ -109,22 +125,30 @@ export default function AirPollutionItem({ air, onClickHandler }) {
             </AirAreaText>
           </AirAreaBlock>
           <AirPollutionWrapper>
-            <AirPollution>
-              <AirTotalText>미세먼지(㎍/㎥)</AirTotalText>
-              <div>{PM10}</div>
-              <AirTotalText>초미세먼지농도(㎍/㎥)</AirTotalText>
-              <div>{PM25}</div>
-              <AirTotalText>오존(ppm)</AirTotalText>
-              <div>{O3}</div>
-            </AirPollution>
-            <AirPollutionDust>
-              <AirTotalText>이산화질소농도(ppm)</AirTotalText>
-              <div>{NO2}</div>
-              <AirTotalText>일산화탄소농도(ppm)</AirTotalText>
-              <div>{CO}</div>
-              <AirTotalText>아황산가스농도(ppm)</AirTotalText>
-              <div>{SO2}</div>
-            </AirPollutionDust>
+            <AirAreaText>
+              <div>{MSRSTE_NM}</div>
+              <div>
+                {IDEX_NM !== "점검중" ? `통합대기환경등급: ${IDEX_NM}` : "-"}
+              </div>
+            </AirAreaText>
+            <AirDetail>
+              <AirPollution>
+                <AirTotalText>미세먼지(㎍/㎥)</AirTotalText>
+                <div>{PM10}</div>
+                <AirTotalText>초미세먼지농도(㎍/㎥)</AirTotalText>
+                <div>{PM25}</div>
+                <AirTotalText>오존(ppm)</AirTotalText>
+                <div>{O3}</div>
+              </AirPollution>
+              <AirPollutionDust>
+                <AirTotalText>이산화질소농도(ppm)</AirTotalText>
+                <div>{NO2}</div>
+                <AirTotalText>일산화탄소농도(ppm)</AirTotalText>
+                <div>{CO}</div>
+                <AirTotalText>아황산가스농도(ppm)</AirTotalText>
+                <div>{SO2}</div>
+              </AirPollutionDust>
+            </AirDetail>
           </AirPollutionWrapper>
         </Card>
       </AirTotalInfo>

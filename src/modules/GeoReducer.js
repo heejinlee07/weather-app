@@ -12,7 +12,6 @@ export default function GeoReducer(state = initialState, action) {
       const area = locations.find(
         (area) => area.id === parseInt(action.payload)
       );
-
       return { ...state, selectedLocation: area };
     default:
       return state;

@@ -4,13 +4,12 @@ import Button from "../common/button";
 import { dayNames } from "../../constants/DateTime";
 import SelectedWeatherItem from "../airPollutions/SelectedAirItem";
 
-const WrapperBlock = styled.div`
-  margin-right: 100px;
-`;
+const WrapperBlock = styled.div``;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start
+  justify-content: center;
+  align-items: center;
   height: 200px;
   border: 1px solid gray;
   border-radius: 10px;
@@ -25,7 +24,7 @@ const TimeBlock = styled.div`
 `;
 
 const TimeInfo = styled.div`
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bold;
 `;
 
@@ -38,6 +37,7 @@ const Greeting = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px;
+  font-size: 18px;
 `;
 
 const Input = styled.input`
