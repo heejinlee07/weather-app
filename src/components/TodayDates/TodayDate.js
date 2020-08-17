@@ -1,48 +1,16 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Button from "../common/button";
 import { dayNames } from "../../constants/DateTime";
-import SelectedWeatherItem from "../airPollutions/SelectedAirItem";
-
-const WrapperBlock = styled.div``;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  border: 1px solid gray;
-  border-radius: 10px;
-`;
-
-const TimeBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
-  width: 350px;
-`;
-
-const TimeInfo = styled.div`
-  font-size: 45px;
-  font-weight: bold;
-`;
-
-const DateInfo = styled.div`
-  font-size: 30px;
-`;
-
-const Greeting = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  font-size: 18px;
-`;
-
-const Input = styled.input`
-  margin-right: 10px;
-`;
+import SelectedWeatherItem from "../airItemsSelected/SelectedAirItem";
+import {
+  WrapperBlock,
+  Wrapper,
+  TimeBlock,
+  TimeInfo,
+  DateInfo,
+  Greeting,
+  Input,
+} from "./TodayDate.styles";
 
 const today = new Date();
 

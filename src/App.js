@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-import TotalInfo from "./components/weatherInfos/TotalInfo";
-import AirPollutionList from "./components/airPollutions/AirPollutionList";
+import WeatherPage from "./pages/WeatherPage";
+import AirPollutionPage from "./pages/AirPollutionPage";
 
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
@@ -58,8 +58,8 @@ function App() {
           <Title>오늘의 날씨</Title>
         </>
         <Switch>
-          <Route exact path="/" component={TotalInfo} />
-          <Route path="/air" component={AirPollutionList} />
+          <Route exact path="/" component={WeatherPage} />
+          <Route path="/air" component={AirPollutionPage} />
         </Switch>
       </BrowserRouter>
     </Main>

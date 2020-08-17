@@ -4,7 +4,7 @@ export const WEATHER_SET_DATA = "WEATHER_SET_DATA";
 export const HISTORY_WEATHER_SET_DATA = "HISTORY_WEATHER_SET_DATA";
 
 const initialState = {
-  weathers: [],
+  weathers: {},
   historyWeather: [],
   status: "idle",
 };

@@ -8,13 +8,15 @@ import TodayDate from "./TodayDate";
 import { Wrapper } from "./CurrentWeatherInfo.styles";
 import { CustomSelect } from "../../styles/CommonStyle";
 import WeekWeatherInfo from "./WeekWeatherInfo";
+import CurrentWeatherInfo from "./CurrentWeatherInfo";
+import Test from "./Test";
 
 const SelectBox = styled.div`
   position: absolute;
   right: 150px;
 `;
 
-const TotalInfo = ({ week }) => {
+const TotalInfo = () => {
   const selectedLocation = useSelector(({ geos }) => geos.selectedLocation);
   const dispatch = useDispatch();
 
@@ -92,7 +94,8 @@ const TotalInfo = ({ week }) => {
       </SelectBox>
       <Wrapper>
         <TodayDate />
-        <WeekWeatherInfo />
+        <CurrentWeatherInfo />
+        {/* <Test /> */}
       </Wrapper>
     </>
   );

@@ -1,54 +1,23 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { api } from "../../services/airPollutionApi";
-import AirPollutionItem from "./AirPollutionItem";
 
+import {
+  AirPollutionListBlock,
+  ButtonArea,
+  AirTimeInfo,
+  AirTitle,
+  Wrapper,
+} from "./AirPollutionList.styles";
+
+import AirPollutionItem from "../airPollutionItems/AirPollutionItem";
 import Button from "../common/button";
-
 import {
   AIR_SET_LOADING,
   AIR_SET_DATA,
   AIR_HAS_ERROR,
 } from "../../modules/AirReducer";
-import { useSelector, useDispatch } from "react-redux";
-
-import styled from "styled-components";
-
-const AirPollutionListBlock = styled.div`
-  position: relative;
-`;
-
-const ButtonArea = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 81px;
-  width: 70px;
-`;
-
-const AirTimeInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const AirTitle = styled.div`
-  font-size: 30px;
-  font-weight: 500;
-  margin-top: 20px;
-
-  & > div {
-    font-size: 15px;
-    margin-top: 20px;
-  }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-`;
 
 export default function AirPollutionList() {
   const airs = useSelector(({ airs }) => airs.airs);
@@ -68,7 +37,6 @@ export default function AirPollutionList() {
       dispatch({ type: AIR_SET_LOADING });
       try {
         const { data } = await api.get("/");
-        // setAirs(data.RealtimeCityAir.row);
         dispatch({ type: AIR_SET_DATA, payload: data.RealtimeCityAir.row });
         console.log("data", data);
         console.log("[data array RealtimeCityAir]", data.RealtimeCityAir);

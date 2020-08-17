@@ -1,94 +1,23 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import { AIR_SELECTED_DATA } from "../../modules/AirReducer";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import { AIR_SELECTED_DATA } from "../../modules/AirReducer";
+import {
+  Wrapper,
+  AirTotalInfo,
+  Card,
+  AirAreaBlock,
+  AirAreaText,
+  AirPollutionWrapper,
+  AirDetail,
+  AirPollution,
+  AirPollutionDust,
+  AirTotalText,
+} from "./AirPollutionItem.styles";
 import clearSky from "../../assets/clearSky.jpg";
 import sunnySky from "../../assets/sunnySky.jpg";
 import main2 from "../../assets/main2.jpg";
-
-const Wrapper = styled.div``;
-
-const AirTotalInfo = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  height: 220px;
-  margin: 20px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  cursor: pointer;
-`;
-
-const Card = styled.div`
-  position: relative;
-  perspective: 150rem;
-`;
-
-const AirAreaBlock = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  padding: 40px;
-  width: 380px;
-  height: 200px;
-  border-radius: 10px;
-  background-image: url(${(props) => props.url});
-  background-size: cover;
-  transform: rotateY(0deg);
-  backface-visibility: hidden;
-
-  &:hover {
-    transform: rotateY(-180deg);
-    transition: 1s;
-  }
-`;
-
-const AirAreaText = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 500;
-`;
-
-const AirPollutionWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 380px;
-  height: 220px;
-`;
-
-const AirDetail = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 10px;
-`;
-
-const AirPollution = styled.div`
-  margin-right: 15px;
-  height: 200px;
-
-  & > * {
-    font-size: 20px;
-  }
-`;
-
-const AirPollutionDust = styled.div`
-  font-size: 20px;
-`;
-
-const AirTotalText = styled.div`
-  font-size: 14px;
-  color: gray;
-  margin-top: 10px;
-`;
 
 function getWeatherImage(type) {
   switch (type) {

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import AirPollutionItem from "./AirPollutionItem";
+import AirPollutionItem from "../airPollutionItems/AirPollutionItem";
 
 const Wrapper = styled.div`
   display: flex;
