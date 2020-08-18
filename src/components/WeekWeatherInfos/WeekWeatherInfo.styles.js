@@ -7,10 +7,11 @@ export const WeekWrapper = styled.div`
 export const WeekWeatherBlock = styled.div`
   display: flex;
   flex-direction: row;
-  border: 1px solid red;
+  justify-content: space-around;
+  border: 1px solid gray;
   border-radius: 10px;
-  width: 100px;
-  margin-top: 20px;
+  width: 70px;
+  margin: 20px 5px 0;
 `;
 
 export const WeekWeatherInner = styled.div`

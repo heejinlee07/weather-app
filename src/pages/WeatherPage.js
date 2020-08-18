@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { api } from "../services/weatherApi";
 import { API_KEY } from "../services/weatherKey";
 
@@ -64,11 +64,6 @@ const WeatherPage = () => {
         <WrapperBlock>
           <TodayDate />
           <SelectedWeatherItem />
-          <WeekWrapper>
-            {weathers.daily?.slice(1).map((week) => (
-              <WeekWeatherInfo week={week} />
-            ))}
-          </WeekWrapper>
         </WrapperBlock>
         <WeatherWrapper>
           <CurrentWeatherInfo weathers={weathers} />
@@ -80,6 +75,11 @@ const WeatherPage = () => {
           <CurrentWeatherInfoDetails weathers={weathers} />
         </WeatherWrapper>
       </Wrapper>
+      <WeekWrapper>
+        {weathers.daily?.slice(1).map((week) => (
+          <WeekWeatherInfo week={week} />
+        ))}
+      </WeekWrapper>
     </>
   );
 };
