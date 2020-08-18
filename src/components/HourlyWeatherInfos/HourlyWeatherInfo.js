@@ -1,44 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 
 import { getFixedNumberWithDefaultWithoutOrder } from "../../utils/calculate";
 import { dayNames } from "../../constants/DateTime";
 import { IconImg } from "../../styles/CommonStyle";
 
-const Wrapper = styled.div``;
-
-const CurrentHourlyTime = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 70px;
-  margin: 5px 0;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CurrentHourlyHumidity = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 5px 0;
-  font-size: 13px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CurrentHourlyIcon = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CurrentHourlyTemp = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 5px 0;
-`;
+import {
+  Wrapper,
+  CurrentHourlyTime,
+  CurrentHourlyHumidity,
+  CurrentHourlyIcon,
+  CurrentHourlyTemp,
+} from "./HourlyWeatherInfo.styles";
 
 function HourlyWeatherInfo({ hourly }) {
   console.log("hourly", hourly);

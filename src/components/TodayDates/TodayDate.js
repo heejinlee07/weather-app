@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Button from "../common/button";
 import { dayNames } from "../../constants/DateTime";
-import SelectedWeatherItem from "../airItemsSelected/SelectedAirItem";
 import {
-  WrapperBlock,
   Wrapper,
   TimeBlock,
   TimeInfo,
@@ -70,44 +68,41 @@ export default function TodayDate() {
   };
 
   return (
-    <WrapperBlock>
-      <Wrapper>
-        <TimeBlock>
-          <TimeInfo>
-            {hour} : {minute} {ampm}
-          </TimeInfo>
-          <DateInfo>
-            {month}월 {date}일
-          </DateInfo>
-          <Greeting>
-            <div style={{ marginRight: "10px" }}>안녕하세요</div>
-            {!isLoggedIn && (
-              <>
-                <Input
-                  value={value}
-                  onChange={onChange}
-                  onKeyPress={onEnter}
-                  placeholder="이름을 입력하세요"
-                />
-                <Button btnwidth={30} btnHeight={7} onClick={onCreate}>
-                  Add
-                </Button>
-              </>
-            )}
-            {isLoggedIn && (
-              <>
-                <div style={{ marginRight: "7px" }}>
-                  {localStorage.getItem("username")}님
-                </div>
-                <Button btnwidth={30} btnHeight={7} onClick={onRemove}>
-                  Edit
-                </Button>
-              </>
-            )}
-          </Greeting>
-        </TimeBlock>
-      </Wrapper>
-      <SelectedWeatherItem />
-    </WrapperBlock>
+    <Wrapper>
+      <TimeBlock>
+        <TimeInfo>
+          {hour} : {minute} {ampm}
+        </TimeInfo>
+        <DateInfo>
+          {month}월 {date}일
+        </DateInfo>
+        <Greeting>
+          <div style={{ marginRight: "10px" }}>안녕하세요</div>
+          {!isLoggedIn && (
+            <>
+              <Input
+                value={value}
+                onChange={onChange}
+                onKeyPress={onEnter}
+                placeholder="이름을 입력하세요"
+              />
+              <Button btnwidth={30} btnHeight={7} onClick={onCreate}>
+                Add
+              </Button>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <div style={{ marginRight: "7px" }}>
+                {localStorage.getItem("username")}님
+              </div>
+              <Button btnwidth={30} btnHeight={7} onClick={onRemove}>
+                Edit
+              </Button>
+            </>
+          )}
+        </Greeting>
+      </TimeBlock>
+    </Wrapper>
   );
 }

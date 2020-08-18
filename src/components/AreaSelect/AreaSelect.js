@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { useSelector, useDispatch } from "react-redux";
 import { locations } from "../../constants/Geolocation";
 import { GEO_SET_DATA } from "../../modules/GeoReducer";
-import TodayDate from "./TodayDate";
-import { Wrapper } from "./CurrentWeatherInfo.styles";
 import { CustomSelect } from "../../styles/CommonStyle";
-import WeekWeatherInfo from "./WeekWeatherInfo";
-import CurrentWeatherInfo from "./CurrentWeatherInfo";
-import Test from "./Test";
 
 const SelectBox = styled.div`
   position: absolute;
   right: 150px;
 `;
 
-const TotalInfo = () => {
+const AreaSelect = () => {
   const selectedLocation = useSelector(({ geos }) => geos.selectedLocation);
   const dispatch = useDispatch();
 
@@ -92,13 +87,8 @@ const TotalInfo = () => {
           })}
         />
       </SelectBox>
-      <Wrapper>
-        <TodayDate />
-        <CurrentWeatherInfo />
-        {/* <Test /> */}
-      </Wrapper>
     </>
   );
 };
 
-export default TotalInfo;
+export default AreaSelect;

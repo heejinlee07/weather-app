@@ -13,15 +13,19 @@ import CurrentWeatherInfo from "../components/CurrentWeatherInfos/CurrentWeather
 
 import WeekWeatherInfo from "../components/WeekWeatherInfos/WeekWeatherInfo";
 import HourlyWeatherInfo from "../components/HourlyWeatherInfos/HourlyWeatherInfo";
-
+import SelectedWeatherItem from "../components/airItemsSelected/SelectedAirItem";
 import {
+  WrapperBlock,
+  Wrapper,
   WeatherWrapper,
   CurrentHourlyInfo,
 } from "../components/CurrentWeatherInfos/CurrentWeatherInfo.styles";
 
+import { WeekWrapper } from "../components/WeekWeatherInfos/WeekWeatherInfo.styles";
 import { IconImg } from "../styles/CommonStyle";
 import TodayDate from "../components/TodayDates/TodayDate";
 import CurrentWeatherInfoDetails from "../components/currentWeatherInfoDetails/CurrentWeatherInfoDetails";
+import AreaSelect from "../components/AreaSelect/AreaSelect";
 
 // import Test from "./Test";
 
@@ -53,24 +57,29 @@ const WeatherPage = () => {
 
   return (
     <>
-      {status === "loading" && <h1>Now Loading...</h1>}
-      {status === "error" && <h1>Error Occured...</h1>}
-      <TodayDate />
-      <WeatherWrapper>
-        <CurrentWeatherInfo weathers={weathers} />
-        <CurrentHourlyInfo>
-          {/* TODO: hourly */}
-          {weathers.hourly?.map((_hourly) => (
-            <HourlyWeatherInfo hourly={_hourly} />
-          ))}
-          {/* TODO: week */}
-        </CurrentHourlyInfo>
-        {weathers.daily?.slice(1).map((week) => (
-          <WeekWeatherInfo week={week} />
-        ))}
-        {/* TODO: currentDetail */}
-        <CurrentWeatherInfoDetails weathers={weathers} />
-      </WeatherWrapper>
+      <AreaSelect />
+      <Wrapper>
+        {status === "loading" && <h1>Now Loading...</h1>}
+        {status === "error" && <h1>Error Occured...</h1>}
+        <WrapperBlock>
+          <TodayDate />
+          <SelectedWeatherItem />
+          <WeekWrapper>
+            {weathers.daily?.slice(1).map((week) => (
+              <WeekWeatherInfo week={week} />
+            ))}
+          </WeekWrapper>
+        </WrapperBlock>
+        <WeatherWrapper>
+          <CurrentWeatherInfo weathers={weathers} />
+          <CurrentHourlyInfo>
+            {weathers.hourly?.map((_hourly) => (
+              <HourlyWeatherInfo hourly={_hourly} />
+            ))}
+          </CurrentHourlyInfo>
+          <CurrentWeatherInfoDetails weathers={weathers} />
+        </WeatherWrapper>
+      </Wrapper>
     </>
   );
 };

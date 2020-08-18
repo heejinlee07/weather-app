@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+export const WrapperBlock = styled.div``;
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
