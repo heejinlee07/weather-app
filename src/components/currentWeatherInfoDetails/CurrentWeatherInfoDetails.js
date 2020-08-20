@@ -20,8 +20,8 @@ export default function CurrentWeatherInfoDetails({ weathers }) {
   hour = hour || 12;
 
   const todayKeyword = hour <= 12 ? "오늘" : "야간";
-  console.log(todayKeyword);
-  console.log(hour);
+  // console.log(todayKeyword);
+  // console.log(hour);
 
   // 일출,일몰 시간 계산
   const sunriseTime = new Date(weathers.current?.sunrise * 1000);
@@ -42,7 +42,7 @@ export default function CurrentWeatherInfoDetails({ weathers }) {
       <CurrentDescription>
         {todayKeyword}: 현재 날씨{" "}
         {weathers.current?.weather.map((main) => (
-          <span>{main.description}, </span>
+          <span key={main.id}>{main.description}, </span>
         ))}
         최고 기온은 {weathers.daily?.[0].temp.max.toFixed()}°이며, 예상 최저
         기온은 {weathers.daily?.[0].temp.min.toFixed()}

@@ -25,3 +25,16 @@ export function getFixedNumberWithDefaultWithoutOrder({
 
   return `${calculate(value)}${units}`;
 }
+
+// hourly
+// {getFixedNumberWithDefaultWithoutOrder({
+//   value: hourly.pop,
+//   fallback: "-",
+//   calculate: (_val) => (_val * 100).toFixed(),
+//   units: "%",
+// })}
+
+// CurrentHourlyInfo
+//   {getFixedNumberWithDefaultWithoutOrder({
+//   value: weathers.daily?.[0].rain,
+// })}

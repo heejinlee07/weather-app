@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
 import { useSelector, useDispatch } from "react-redux";
-import { locations } from "../../constants/Geolocation";
-import { GEO_SET_DATA } from "../../modules/GeoReducer";
 import { CustomSelect } from "../../styles/CommonStyle";
 
+import Inputs from "../common/input/Inputs";
+import { locations } from "../../constants/Geolocation";
+import { GEO_SET_DATA, GEO_SEARCH_DATA } from "../../modules/GeoReducer";
+
 const SelectBox = styled.div`
-  position: absolute;
-  right: 150px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1100px;
 `;
 
 const AreaSelect = () => {
+  const [input, setInputs] = useState("");
   const selectedLocation = useSelector(({ geos }) => geos.selectedLocation);
+  console.log("hihih", selectedLocation);
   const dispatch = useDispatch();
 
   const options = locations.map((area) => ({
@@ -23,6 +28,13 @@ const AreaSelect = () => {
   const onChange = (e) => {
     dispatch({ type: GEO_SET_DATA, payload: e.value });
     console.log("e", e, "e.value", e.value);
+  };
+
+  const SearchArea = (e) => {
+    if (e.key === "Enter") {
+      dispatch({ type: GEO_SEARCH_DATA, payload: e.target.value });
+    }
+    setInputs("");
   };
 
   // const customStyles = {
@@ -71,6 +83,13 @@ const AreaSelect = () => {
         ))}
       </Selects> */}
       <SelectBox>
+        <Inputs
+          placeholder="도시를 입력하세요"
+          InputWidth={200}
+          InputPadding={8}
+          InputBorderRad={10}
+          onKeyPress={SearchArea}
+        />
         <CustomSelect
           options={options}
           onChange={onChange}

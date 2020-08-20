@@ -20,8 +20,8 @@ const CurrentWeatherInfo = ({ weathers }) => {
   hour = hour || 12;
 
   const todayKeyword = hour <= 12 ? "오늘" : "야간";
-  console.log(todayKeyword);
-  console.log(hour);
+  // console.log(todayKeyword);
+  // console.log(hour);
 
   const CurrentIconId = weathers.current?.weather.map((icon) => icon.icon);
 
@@ -31,7 +31,7 @@ const CurrentWeatherInfo = ({ weathers }) => {
         <Timezone>{weathers?.timezone}</Timezone>
         <div>
           {weathers.current?.weather.map((main) => (
-            <div>{main.description}</div>
+            <div key={main.id}>{main.description}</div>
           ))}
         </div>
         <div>{weathers.current?.temp.toFixed()} ℃</div>

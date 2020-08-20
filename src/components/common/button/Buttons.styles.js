@@ -6,9 +6,9 @@ export const ButtonUi = styled.div`
   color: ${(props) => props.color || "black"};
   text-decoration: none;
   text-align: center;
-  padding: 5px;
-  margin: 3px;
-  border-radius: 7px;
+  padding: ${(props) => props.BtnPadding || 5}px;
+  margin: ${(props) => props.BtnMargin || 3}px;
+  border-radius: ${(props) => props.BtnBorderRad || 7}px;
   border: 1px solid black;
   cursor: pointer;
 

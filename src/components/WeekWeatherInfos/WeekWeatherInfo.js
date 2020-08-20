@@ -10,7 +10,6 @@ import { IconImg } from "../../styles/CommonStyle";
 
 export default function WeekWeatherInfo({ week }) {
   const time = new Date(week.dt * 1000);
-  console.log("week", week);
   const name = dayNames[time.getDay()];
 
   const DailyIconId = week?.weather.map((icon) => icon.icon);

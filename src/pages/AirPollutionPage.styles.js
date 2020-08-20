@@ -5,10 +5,10 @@ export const AirPollutionListBlock = styled.div`
 `;
 
 export const ButtonArea = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 81px;
-  width: 70px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1100px;
 `;
 
 export const AirTimeInfo = styled.div`

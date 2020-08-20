@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../common/button";
+import Buttons from "../common/button/Buttons";
 import { dayNames } from "../../constants/DateTime";
 import {
   Wrapper,
@@ -86,9 +86,9 @@ export default function TodayDate() {
                 onKeyPress={onEnter}
                 placeholder="이름을 입력하세요"
               />
-              <Button btnwidth={30} btnHeight={7} onClick={onCreate}>
+              <Buttons btnwidth={30} btnHeight={7} onClick={onCreate}>
                 Add
-              </Button>
+              </Buttons>
             </>
           )}
           {isLoggedIn && (
@@ -96,9 +96,9 @@ export default function TodayDate() {
               <div style={{ marginRight: "7px" }}>
                 {localStorage.getItem("username")}님
               </div>
-              <Button btnwidth={30} btnHeight={7} onClick={onRemove}>
+              <Buttons btnwidth={30} btnHeight={7} onClick={onRemove}>
                 Edit
-              </Button>
+              </Buttons>
             </>
           )}
         </Greeting>

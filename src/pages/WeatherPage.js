@@ -69,7 +69,7 @@ const WeatherPage = () => {
           <CurrentWeatherInfo weathers={weathers} />
           <CurrentHourlyInfo>
             {weathers.hourly?.map((_hourly) => (
-              <HourlyWeatherInfo hourly={_hourly} />
+              <HourlyWeatherInfo key={_hourly.dt} hourly={_hourly} />
             ))}
           </CurrentHourlyInfo>
           <CurrentWeatherInfoDetails weathers={weathers} />
@@ -77,7 +77,7 @@ const WeatherPage = () => {
       </Wrapper>
       <WeekWrapper>
         {weathers.daily?.slice(1).map((week) => (
-          <WeekWeatherInfo week={week} />
+          <WeekWeatherInfo key={week.dt} week={week} />
         ))}
       </WeekWrapper>
     </>
